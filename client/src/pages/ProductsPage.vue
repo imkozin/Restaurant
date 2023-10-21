@@ -7,7 +7,7 @@
                 <h3 class="product__card-title">{{ product.title }}</h3>
                 <h5 class="product__card-descrip">{{ product.description }}</h5>
                 <div class="product__card-bottom">
-                    <h4 class="product__card-bottom_price">{{ product.price }}</h4>
+                    <h4 class="product__card-bottom_price">{{ product.price }} $</h4>
                     <button class="product__card-bottom_btn">+</button>
                 </div>
             </div>
