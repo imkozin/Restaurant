@@ -9,7 +9,7 @@ import cake from './assets/8.png'
 
 export const products = [
   {
-    id: 1,
+    id: '1',
     title: 'Oysters Rockefeller',
     description:
       'Plump and savory oysters bathed in a rich, herb-infused sauce, then baked to perfection. A classic delicacy with an exquisite blend of flavors.',
@@ -17,7 +17,7 @@ export const products = [
     image: oysters,
   },
   {
-    id: 2,
+    id: '2',
     title: 'Grilled Pork Ribs with Greens',
     description:
       'Delicious pork ribs grilled to perfection and served with a generous helping of fresh greens.',
@@ -25,7 +25,7 @@ export const products = [
     image: porkRibs,
   },
   {
-    id: 3,
+    id: '3',
     title: 'King Prawns in Lemon Juice',
     description:
       'Succulent king prawns prepared in zesty lemon juice for a burst of flavor.',
@@ -33,7 +33,7 @@ export const products = [
     image: shrimps,
   },
   {
-    id: 4,
+    id: '4',
     title: 'Marble Beef Burger',
     description:
       'A juicy burger made from the finest marble beef, creating an exquisite and flavorful experience.',
@@ -41,7 +41,7 @@ export const products = [
     image: burger,
   },
   {
-    id: 5,
+    id: '5',
     title: 'Crispy Calamari Rings',
     description:
       'Golden-brown and crispy calamari rings, served with a tangy dipping sauce. A delightful seafood appetizer.',
@@ -49,7 +49,7 @@ export const products = [
     image: calmari,
   },
   {
-    id: 6,
+    id: '6',
     title: 'Sizzling Tandoori Chicken',
     description:
       'A sizzling sensation! Tender and flavorful tandoori chicken, marinated in aromatic spices, served piping hot.',
@@ -57,7 +57,7 @@ export const products = [
     image: tandoori,
   },
   {
-    id: 7,
+    id: '7',
     title: 'Caprese Salad',
     description:
       'A fresh and vibrant Caprese salad featuring ripe tomatoes, mozzarella cheese, and basil leaves drizzled with balsamic glaze.',
@@ -65,7 +65,7 @@ export const products = [
     image: salad,
   },
   {
-    id: 8,
+    id: '8',
     title: 'Chocolate Lava Cake',
     description:
       "Indulge your sweet tooth with our decadent chocolate lava cake, a warm and gooey treat that's pure bliss for chocolate lovers.",
