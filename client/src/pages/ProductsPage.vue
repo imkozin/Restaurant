@@ -12,13 +12,15 @@
         </div>
         <div class="products__wrapper">
             <div v-for="product in products" :key="product.id" class="product__card">
-                <img :src="product.image" alt="plate" class="product__card-image">
-                <h3 class="product__card-title">{{ product.title }}</h3>
-                <h5 class="product__card-descrip">{{ product.description }}</h5>
-                <div class="product__card-bottom">
-                    <h4 class="product__card-bottom_price">{{ product.price }} $</h4>
-                    <button class="product__card-bottom_btn">+</button>
-                </div>
+                <router-link :to="{ path: `products/${product.id}` }">
+                    <img :src="product.image" alt="plate" class="product__card-image">
+                </router-link>
+                    <h3 class="product__card-title">{{ product.title }}</h3>
+                    <h5 class="product__card-descrip">{{ product.description }}</h5>
+                    <div class="product__card-bottom">
+                        <h4 class="product__card-bottom_price">{{ product.price }} $</h4>
+                        <button class="product__card-bottom_btn">+</button>
+                    </div>
             </div>
         </div>
     </div>

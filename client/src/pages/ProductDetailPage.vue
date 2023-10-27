@@ -1,5 +1,5 @@
 <template>
-    <div class="detail-page">
+    <div class="detail__page">
         <div class="detail__page-header">
             <router-link
             to="/products"
@@ -15,13 +15,18 @@
             >
                 <CartButton @click="navigate"/>
             </router-link>
+            <button class="detail__page-header_btn">Logout</button>
         </div>
-        <div class="product-wrapper">
-            <img :src="product.image" alt="image">
-            <h1>{{ product.title }}</h1>
-            <h3>{{ product.price }}</h3>
-            <p>{{ product.description }}</p>
-            <button>Add to Cart</button>
+        <div class="product__wrapper">
+            <img :src="product.image" alt="image" class="product__wrapper-image">
+            <div class="product__wrapper-card">
+                <h1 class="product__card-title">{{ product.title }}</h1>
+                <h3 class="product__card-descrip">{{ product.description }}</h3>
+                <div class="product__card-bottom">
+                    <h2 class="product__card-bottom_proce">{{ product.price }} $</h2>
+                    <button class="product__card-bottom_btn">Add to Cart</button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -46,5 +51,80 @@ import CartButton from '@/components/CartButton.vue';
 </script>
 
 <style lang="scss" scoped>
+.detail__page {
+    height: 100vh;
+    background: url('@/assets/image-bg.png');
+    background-repeat: repeat;
+    background-size: cover;
 
+    &-header {
+        display: flex;
+        justify-content: space-between;
+
+        &_btn {
+            width: 200px;
+            height: 42px;
+            color: #D58C51;
+            background: transparent;
+            border: 1px solid #D58C51;
+        }
+    }
+}
+
+.product__wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 200px;
+
+    &-image {
+        width: 501px;
+        height: 503px;
+    }
+
+    &-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+.product__card {
+    &-title {
+        color: #D58C51;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        margin-bottom: 21px;
+    }
+
+    &-descrip {
+        width: 528px;
+        height: 213px;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    &-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &_price {
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+        }
+
+        &_btn {
+            cursor: pointer;
+            width: 200px;
+            height: 42px;
+            font-size: 18px;
+            background: #D58C51;
+            border: none;
+        }
+    }
+}
 </style>
