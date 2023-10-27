@@ -8,7 +8,9 @@
             >
                 <BackButton @click="navigate"/>
             </router-link>
-            <router-link
+            <div>
+                <p>0 good(s) in cart</p>
+                <router-link
             to="/cart"
             custom
             v-slot="{ navigate }"
@@ -16,8 +18,9 @@
                 <CartButton @click="navigate"/>
             </router-link>
             <button class="detail__page-header_btn">Logout</button>
+            </div>
         </div>
-        <div class="product__wrapper">
+        <div v-if="product" class="product__wrapper">
             <img :src="product.image" alt="image" class="product__wrapper-image">
             <div class="product__wrapper-card">
                 <h1 class="product__card-title">{{ product.title }}</h1>
@@ -28,6 +31,9 @@
                 </div>
             </div>
         </div>
+        <div v-if="!product">
+            <PageNotFound />
+        </div>
     </div>
 </template>
 
@@ -35,12 +41,14 @@
 import { products } from '@/data';
 import BackButton from '@/components/BackButton.vue';
 import CartButton from '@/components/CartButton.vue';
+import PageNotFound from './PageNotFound.vue';
 
     export default {
         name: "ProductDetailPage",
         components: {
             BackButton,
-            CartButton
+            CartButton,
+            PageNotFound
         },
         data() {
             return {

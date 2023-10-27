@@ -7,6 +7,25 @@ import tandoori from './assets/6.png'
 import salad from './assets/7.png'
 import cake from './assets/8.png'
 
+export const cartItems = [
+  {
+    id: '1',
+    title: 'Oysters Rockefeller',
+    description:
+      'Plump and savory oysters bathed in a rich, herb-infused sauce, then baked to perfection. A classic delicacy with an exquisite blend of flavors.',
+    price: '27.00',
+    image: oysters,
+  },
+  {
+    id: '2',
+    title: 'Grilled Pork Ribs with Greens',
+    description:
+      'Delicious pork ribs grilled to perfection and served with a generous helping of fresh greens.',
+    price: '16.00',
+    image: porkRibs,
+  },
+]
+
 export const products = [
   {
     id: '1',

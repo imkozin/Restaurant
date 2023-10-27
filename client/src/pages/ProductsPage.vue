@@ -2,17 +2,13 @@
     <div class="products__page">
         <div class="products__page-header">
             <h1 class="page-title">Our Products</h1>
-            <router-link
-            to="/cart"
-            custom
-            v-slot="{ navigate }"
-            >
-            <CartButton @click="navigate"/>
-            </router-link>
+
+            <p>0 good(s) in cart</p>
+            <CartButton/>
         </div>
         <div class="products__wrapper">
             <div v-for="product in products" :key="product.id" class="product__card">
-                <router-link :to="{ path: `products/${product.id}` }">
+                <router-link :to="'/products/' + product.id">
                     <img :src="product.image" alt="plate" class="product__card-image">
                 </router-link>
                     <h3 class="product__card-title">{{ product.title }}</h3>
@@ -46,13 +42,10 @@ import CartButton from '@/components/CartButton.vue';
 
 <style lang="scss" scoped>
 .products__page {
-    height: 100vh;
-
     &-header {
         display: flex;
         justify-content: space-between;
-        margin: 48px 70px 75px 70px;
-        margin-top: 54px;
+        margin: 0 70px 75px 70px;
         align-items: center;
     }
 }
