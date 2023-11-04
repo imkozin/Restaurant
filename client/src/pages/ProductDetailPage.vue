@@ -21,7 +21,7 @@
             </div>
         </div>
         <div v-if="product" class="product__wrapper">
-            <img :src="product.image" alt="image" class="product__wrapper-image">
+            <img :src="product.imageUrl" alt="image" class="product__wrapper-image">
             <div class="product__wrapper-card">
                 <h1 class="product__card-title">{{ product.title }}</h1>
                 <h3 class="product__card-descrip">{{ product.description }}</h3>
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { products } from '@/data';
+import axios from 'axios';
 import BackButton from '@/components/BackButton.vue';
 import CartButton from '@/components/CartButton.vue';
 import PageNotFound from './PageNotFound.vue';
@@ -52,8 +52,13 @@ import PageNotFound from './PageNotFound.vue';
         },
         data() {
             return {
-                product: products.find(product => product.id === this.$route.params.productId)
+                product: {},
             }
+        },
+        async created() {
+            const response = await axios.get(`/api/products/${this.$route.params.productId}`);
+            const product = response.data;
+            this.product = product
         }
     }
 </script>

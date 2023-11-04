@@ -11,9 +11,9 @@
 </template>
 
 <script>
-import { products } from '@/data';
 import CartButton from '@/components/CartButton.vue';
 import ProductsList from '@/components/ProductsList.vue';
+import axios from 'axios';
 
     export default {
         name: "ProductsPage",
@@ -22,10 +22,15 @@ import ProductsList from '@/components/ProductsList.vue';
             ProductsList,
         },
 
-        setup() {
+        data() {
             return {
-                products,
+                products: [],
             }
+        },
+        async created() {
+            const response = await axios.get('/api/products');
+            const products = response.data;
+            this.products = products
         }
     }
 </script>

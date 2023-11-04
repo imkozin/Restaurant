@@ -1,7 +1,7 @@
 <template>
     <div v-for="product in products" class="product__card" :key="product.id">
         <router-link :to="'/products/' + product.id">
-            <img :src="product.image" alt="plate" class="product__card-image">
+            <img :src="product.imageUrl" alt="plate" class="product__card-image">
         </router-link>
         <h4 class="product__card-title">{{ product.title }}</h4>
             <div class="product__card-bottom">

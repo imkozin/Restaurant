@@ -22,7 +22,7 @@
 
 <script>
 import BackButton from '@/components/BackButton.vue'
-import { cartItems } from '@/data'
+import axios from 'axios';
 import ShoppingCartList from '@/components/ShoppingCartList.vue'
 
 export default {
@@ -31,11 +31,16 @@ export default {
     BackButton,
     ShoppingCartList,
   },
-  setup() {
+  data() {
     return {
-      cartItems,
+      cartItems: [],
     }
   },
+  async created() {
+    const response = await axios.get('/api/users/123456/cart')
+    const cartItems = response.data;
+    this.cartItems = cartItems;
+  }
 }
 </script>
 

@@ -2,7 +2,7 @@
     <div class="products__wrapper">
             <div v-for="product in products" :key="product.id" class="product__card">
                 <router-link :to="'/products/' + product.id">
-                    <img :src="product.image" alt="plate" class="product__card-image">
+                    <img :src="product.imageUrl" alt="plate" class="product__card-image">
                 </router-link>
                     <h3 class="product__card-title">{{ product.title }}</h3>
                     <h5 class="product__card-descrip">{{ product.description }}</h5>
