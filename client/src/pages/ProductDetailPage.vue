@@ -8,6 +8,7 @@
             >
                 <BackButton @click="navigate"/>
             </router-link>
+            <p>{{cartTotalLength}} good(s) in cart</p>
             <div>
                 <router-link
             to="/cart"
@@ -47,6 +48,7 @@
 import axios from 'axios';
 import BackButton from '@/components/BackButton.vue';
 import PageNotFound from './PageNotFound.vue';
+import CartButton from '@/components/CartButton.vue';
 
     export default {
         name: "ProductDetailPage",
@@ -56,14 +58,31 @@ import PageNotFound from './PageNotFound.vue';
                 quantity: 1,
                 snackbar: false,
                 text: `The product was added successfully`,
+                cartItems: []
             }
         },
         components: {
             BackButton,
-            PageNotFound
+            PageNotFound,
+            CartButton
+        },
+        beforeCreate() {
+            this.$store.commit('initializeStore')
         },
         mounted() {
             this.getProduct()
+
+            this.cartItems = this.$store.state.cartItems
+        },
+        computed: {
+            cartTotalLength() {
+                let totalLen = 0
+
+                for (let i = 0; i < this.cartItems.length; i++) {
+                        totalLen += this.cartItems[i].quantity
+                    }
+                return totalLen
+            }
         },
         methods: {
             async getProduct() {

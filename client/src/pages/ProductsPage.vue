@@ -2,6 +2,12 @@
     <div class="products__page">
         <div class="products__page-header">
             <h1 class="products__page-title">Our Products</h1>
+            <div>
+                <div class="navbar-container__link">
+                <p>{{cartTotalLength}} good(s) in cart</p>
+                </div>
+                <CartButton />
+            </div>
         </div>
         <ProductsList :products="products"/>
     </div>
@@ -9,21 +15,29 @@
 
 <script>
 import ProductsList from '@/components/ProductsList.vue';
+import CartButton from '@/components/CartButton.vue';
 import axios from 'axios';
 
     export default {
         name: "ProductsPage",
         components: {
             ProductsList,
+            CartButton
         },
         data() {
             return {
                 products: [],
+                cartItems: []
             }
+        },
+        beforeCreate() {
+            this.$store.commit('initializeStore')
         },
         mounted() {
             this.getProducts()
             document.title = 'Burgerovich'
+
+            this.cartItems = this.$store.state.cartItems
         },
         methods: {
             async getProducts() {
@@ -31,7 +45,17 @@ import axios from 'axios';
                 const products = response.data;
                 this.products = products
             }
-        }
+        },
+        computed: {
+            cartTotalLength() {
+                let totalLen = 0
+
+                for (let i = 0; i < this.cartItems.length; i++) {
+                        totalLen += this.cartItems[i].quantity
+                    }
+                return totalLen
+            }
+        },
     }
 </script>
 
