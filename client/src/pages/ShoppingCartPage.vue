@@ -5,7 +5,7 @@
       <h1 class="page-title">Shopping cart with selected items</h1>
     </div>
     <div v-if="cartItems.length > 0" class="cart__page-wrapper">
-      <ShoppingCartList :products="cartItems" />
+      <ShoppingCartList :initialItems="cartItems" v-on:removeFromCart="removeFromCart"/>
     </div>
     <h3 v-else class="cart__page-message">
       You currently have no items in your cart!
@@ -13,7 +13,7 @@
     <hr class="line" />
     <div class="footer">
       <div class="footer__total">
-        Total Amount:<span class="footer__total-amount">0 $</span>
+        Total Amount:<span class="footer__total-amount">{{cartTotalPrice}} $</span>
       </div>
       <button class="footer__out-btn">Proceed to Checkout</button>
     </div>
@@ -22,7 +22,6 @@
 
 <script>
 import BackButton from '@/components/BackButton.vue'
-import axios from 'axios';
 import ShoppingCartList from '@/components/ShoppingCartList.vue'
 
 export default {
@@ -33,13 +32,29 @@ export default {
   },
   data() {
     return {
-      cartItems: [],
+      cartItems: []
     }
   },
-  async created() {
-    const response = await axios.get('/api/users/123456/cart')
-    const cartItems = response.data;
-    this.cartItems = cartItems;
+  mounted() {
+    this.cartItems = this.$store.state.cartItems
+    document.title = 'Shopping Cart'
+  },
+  computed: {
+    cartTotalPrice() {
+      return this.cartItems.reduce((acc, cur) => {
+        return acc += cur.product.price * cur.quantity
+      }, 0)
+    }
+  },
+  methods: {
+    updateCart() {
+      localStorage.setItem('cart', JSON.stringify(this.cartItems))
+    },
+    removeFromCart(product) {
+      this.cartItems = this.cartItems.filter(i => i.product.id !== product.product.id)
+      
+      this.updateCart()
+    }
   }
 }
 </script>

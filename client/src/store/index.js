@@ -1,20 +1,33 @@
 import { createStore } from 'vuex'
-import products from '@/data'
 
 export default createStore({
   state: {
-    Products: products
+    cartItems: [],
+    isAuthenticated: false,
+    token: '',
   },
-  getters: {
-    getProducts: state => state.Products,
-    getProductById: (state) => (productId) => {
-      return state.Products.find(product => product.id === productId);
-    }
-  },
+  getters: {},
   mutations: {
+    initializeStore(state) {
+      if (localStorage.getItem('cart')) {
+        state.cartItems = JSON.parse(localStorage.getItem('cart'))
+      } else {
+        localStorage.setItem('cart', JSON.stringify(state.cartItems))
+      }
+    },
+    addToCart(state, item) {
+      const exists = state.cartItems.filter((i) => i.product.id === item.id)
+
+      if (exists.length) {
+        exists[0].quantity =
+          parseInt(exists[0].quantity) + parseInt(item.quantity)
+      } else {
+        state.cartItems.push(item)
+      }
+
+      localStorage.setItem('cart', JSON.stringify(state.cartItems))
+    },
   },
-  actions: {
-  },
-  modules: {
-  }
+  actions: {},
+  modules: {},
 })

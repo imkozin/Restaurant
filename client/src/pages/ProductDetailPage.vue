@@ -9,7 +9,6 @@
                 <BackButton @click="navigate"/>
             </router-link>
             <div>
-                <p>0 good(s) in cart</p>
                 <router-link
             to="/cart"
             custom
@@ -17,7 +16,6 @@
             >
                 <CartButton @click="navigate"/>
             </router-link>
-            <button class="detail__page-header_btn">Logout</button>
             </div>
         </div>
         <div v-if="product" class="product__wrapper">
@@ -26,9 +24,17 @@
                 <h1 class="product__card-title">{{ product.title }}</h1>
                 <h3 class="product__card-descrip">{{ product.description }}</h3>
                 <div class="product__card-bottom">
-                    <h2 class="product__card-bottom_proce">{{ product.price }} $</h2>
-                    <button class="product__card-bottom_btn">Add to Cart</button>
+                    <h2 class="product__card-bottom_price">{{ product.price }} $</h2>
+                    <!-- <input class="product__card-bottom_num" type="number" min="1" max="99" v-model="quantity"> -->
+                    <button @click="addToCart" class="product__card-bottom_btn">Add to Cart</button>
                 </div>
+                <div class="product__card-snackbar" v-if="snackbar">
+                        <v-snackbar
+                        v-model="snackbar"
+                        >
+                        {{ text }}
+                        </v-snackbar>
+                    </div>
             </div>
         </div>
         <div v-else>
@@ -40,25 +46,54 @@
 <script>
 import axios from 'axios';
 import BackButton from '@/components/BackButton.vue';
-import CartButton from '@/components/CartButton.vue';
 import PageNotFound from './PageNotFound.vue';
 
     export default {
         name: "ProductDetailPage",
-        components: {
-            BackButton,
-            CartButton,
-            PageNotFound
-        },
         data() {
             return {
                 product: {},
+                quantity: 1,
+                snackbar: false,
+                text: `The product was added successfully`,
             }
         },
-        async created() {
-            const response = await axios.get(`/api/products/${this.$route.params.productId}`);
-            const product = response.data;
-            this.product = product
+        components: {
+            BackButton,
+            PageNotFound
+        },
+        mounted() {
+            this.getProduct()
+        },
+        methods: {
+            async getProduct() {
+                this.$store.commit('setIsLoading', true)
+
+                const response = await axios.get(`/api/products/${this.$route.params.productId}`);
+                const product = response.data;
+                this.product = product
+
+                document.title = this.product.title
+
+                this.$store.commit('setIsLoading', false)
+            },
+            addToCart() {
+                if (isNaN(this.quantity) || this.quantity < 1) {
+                    this.quantity = 1
+                }
+
+                const item = {
+                    product: this.product,
+                    quantity: this.quantity,
+                }
+
+                this.$store.commit('addToCart', item)
+
+                this.snackbar = true
+                setTimeout(() => {
+                    this.snackbar = false
+                }, 2000)
+            }
         }
     }
 </script>
@@ -66,9 +101,9 @@ import PageNotFound from './PageNotFound.vue';
 <style lang="scss" scoped>
 .detail__page {
     height: 100vh;
-    background: url('@/assets/image-bg.png');
-    background-repeat: repeat;
-    background-size: cover;
+    // background: url('@/assets/image-bg.png');
+    // background-repeat: repeat;
+    // background-size: cover;
 
     &-header {
         display: flex;
@@ -110,6 +145,14 @@ import PageNotFound from './PageNotFound.vue';
         margin-bottom: 21px;
     }
 
+    &-snackbar {
+        position: fixed;
+        right: 70px;
+        bottom: 30%;
+        min-height: 20px;
+        z-index: 9999;
+    }
+
     &-descrip {
         width: 528px;
         height: 213px;
@@ -123,11 +166,23 @@ import PageNotFound from './PageNotFound.vue';
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-bottom: 10px;
 
         &_price {
             font-style: normal;
             font-weight: 500;
             line-height: normal;
+        }
+
+        &_num {
+            border: 1px solid white;
+            color: #FFF;
+            font-size: 20px;
+            padding-left: 10px;
+            margin-right: 10px;
+            background-color: transparent;
+            width: 60px;
+            height: 30px;
         }
 
         &_btn {

@@ -6,7 +6,7 @@ import PageNotFound from '../pages/PageNotFound.vue'
 
 const routes = [
   {
-    path: '/products',
+    path: '/',
     name: 'products',
     component: ProductsPage
   },
