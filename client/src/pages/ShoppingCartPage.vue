@@ -51,9 +51,8 @@ export default {
       localStorage.setItem('cart', JSON.stringify(this.cartItems))
     },
     removeFromCart(product) {
-      this.cartItems = this.cartItems.filter(i => i.product.id !== product.product.id)
-      
-      this.updateCart()
+      this.cartItems = this.cartItems.filter(item => item.product.id !== product.product.id);
+      this.updateCart();
     }
   }
 }

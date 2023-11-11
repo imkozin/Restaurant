@@ -8,15 +8,15 @@
             >
                 <BackButton @click="navigate"/>
             </router-link>
-            <p>{{cartTotalLength}} good(s) in cart</p>
-            <div>
+            <div class="detail__page-cart">
+                <div>{{cartTotalLength}} good(s) in cart</div>
                 <router-link
             to="/cart"
             custom
             v-slot="{ navigate }"
             >
-                <CartButton @click="navigate"/>
-            </router-link>
+                    <CartButton @click="navigate"/>
+                </router-link>
             </div>
         </div>
         <div v-if="product" class="product__wrapper">
@@ -120,13 +120,12 @@ import CartButton from '@/components/CartButton.vue';
 <style lang="scss" scoped>
 .detail__page {
     height: 100vh;
-    // background: url('@/assets/image-bg.png');
-    // background-repeat: repeat;
-    // background-size: cover;
 
     &-header {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        margin: 10px 70px 75px 70px;
 
         &_btn {
             width: 200px;
@@ -135,6 +134,13 @@ import CartButton from '@/components/CartButton.vue';
             background: transparent;
             border: 1px solid #D58C51;
         }
+    }
+
+    &-cart {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
     }
 }
 

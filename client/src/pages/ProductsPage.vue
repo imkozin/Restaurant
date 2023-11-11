@@ -2,9 +2,8 @@
     <div class="products__page">
         <div class="products__page-header">
             <h1 class="products__page-title">Our Products</h1>
-            <div>
-                <div class="navbar-container__link">
-                <p>{{cartTotalLength}} good(s) in cart</p>
+            <div class="products__page-cart">
+                <div class="products__page-cart_goods">{{cartTotalLength}} good(s) in cart
                 </div>
                 <CartButton />
             </div>
@@ -66,6 +65,13 @@ import axios from 'axios';
         justify-content: space-between;
         margin: 10px 70px 75px 70px;
         align-items: center;
+    }
+
+    &-cart {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
     }
 }
 
