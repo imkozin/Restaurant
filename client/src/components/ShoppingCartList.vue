@@ -5,8 +5,8 @@
         </router-link>
         <h4 class="product__card-title">{{ product.product.title }}</h4>
             <div class="product__card-bottom">
-                <h4 class="product__card-bottom_price">{{ getItemTotal(product) }} $</h4>
-                <DeleteButton @click="removeFromCart(product)"/>
+                <h4 class="product__card-bottom_price">{{ product.product.price }} $</h4>
+                <DeleteButton @click="removeFromCart(product.uniqueId)"/>
             </div>
     </div>
 </template>
@@ -28,8 +28,8 @@ export default {
     }
   },
   methods: {
-    removeFromCart(product) {
-      this.$emit('removeFromCart', product)
+    removeFromCart(productId) {
+      this.$emit('removeFromCart', productId)
     }
   }
 }

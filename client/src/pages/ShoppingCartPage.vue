@@ -40,18 +40,22 @@ export default {
     document.title = 'Shopping Cart'
   },
   computed: {
-    cartTotalPrice() {
-      return this.cartItems.reduce((acc, cur) => {
-        return acc += cur.product.price * cur.quantity
-      }, 0)
+  cartTotalPrice() {
+    const totalPrice = this.cartItems.reduce  ((acc, cur) => {
+        return acc + cur.product.price * cur.quantity;
+      }, 0);
+
+      return totalPrice.toFixed(2);
     }
   },
   methods: {
     updateCart() {
       localStorage.setItem('cart', JSON.stringify(this.cartItems))
     },
-    removeFromCart(product) {
-      this.cartItems = this.cartItems.filter(item => item.product.id !== product.product.id);
+    removeFromCart(productId) {
+      console.log('prod', productId);
+      console.log('cart', this.cartItems);
+      this.cartItems = this.cartItems.filter(item => item.uniqueId !== productId);
       this.updateCart();
     }
   }

@@ -8,7 +8,7 @@
                     <h5 class="product__card-descrip">{{ product.description }}</h5>
                     <div class="product__card-bottom">
                         <h4 class="product__card-bottom_price">{{ product.price }} $</h4>
-                        <button class="product__card-bottom_btn">+</button>
+                        <button class="product__card-bottom_btn" @click="addItemToCart(product)">+</button>
                     </div>
             </div>
         </div>
@@ -18,6 +18,11 @@
     export default {
         name: "ProductsList",
         props: ['products'],
+        methods: {
+        addItemToCart(product) {
+                this.$emit('addItemToCart', product)
+            }
+        }
     }
 </script>
 

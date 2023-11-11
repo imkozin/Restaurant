@@ -8,7 +8,7 @@
                 <CartButton />
             </div>
         </div>
-        <ProductsList :products="products"/>
+        <ProductsList :products="products" v-on:addItemToCart="addItemToCart"/>
     </div>
 </template>
 
@@ -43,6 +43,23 @@ import axios from 'axios';
                 const response = await axios.get('/api/products');
                 const products = response.data;
                 this.products = products
+            },
+            updateCart() {
+                localStorage.setItem('cart', JSON.stringify(this.cartItems))
+            },
+            addItemToCart(product) {
+                if (isNaN(this.quantity) || this.quantity < 1) {
+                    this.quantity = 1
+                }
+
+                const item = {
+                    uniqueId: Date.now(),
+                    product: product,
+                    quantity: this.quantity,
+                }
+
+                this.$store.commit('addToCart', item)
+                console.log('prod', product);
             }
         },
         computed: {

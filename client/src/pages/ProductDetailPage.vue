@@ -102,6 +102,7 @@ import CartButton from '@/components/CartButton.vue';
                 }
 
                 const item = {
+                    uniqueId: Date.now(),
                     product: this.product,
                     quantity: this.quantity,
                 }
