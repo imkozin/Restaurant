@@ -3,22 +3,20 @@
     <router-link to="/">
         <img :src="logo" alt="" class="navbar-logo">
     </router-link>
-        <div class="navbar-container">
-            <div class="navbar-container__link">
-            Login
-            </div>
-            <div class="navbar-container__link">
-            Sign Up
-            </div>
+        <div class="navbar-container" v-if="!token && !isAuthenticated">
+                <router-link to="/login">
+                    <div class="navbar-container__link">Login</div>
+                </router-link>
+                <router-link to="/signup">
+                    <div class="navbar-container__link">Sign Up</div>
+                </router-link>
         </div>
-        
+        <div class="navbar-container" v-else>
+            <router-link to="/login">
+                <div class="navbar-container__link" @click="logout">Log Out</div>
+            </router-link>
+        </div>
     </div>
-    <!-- <router-link to="/login">
-        <div>Login</div>
-    </router-link>
-    <router-link to="/signin">
-        <div>Sign In</div>
-    </router-link> -->
 </template>
 
 <script>
@@ -29,6 +27,21 @@ import logo from '@/assets/logo.png';
         data() {
             return {
                 logo,
+                token: localStorage.getItem('token') || null
+            }
+        },
+        computed: {
+            isAuthenticated() {
+                return this.$store.state.isAuthenticated
+            }
+        },
+        methods: {
+            logout() {
+                this.$store.commit('setAuthenticated', false)
+
+                localStorage.removeItem('token')
+                this.token = null
+                localStorage.removeItem('cart')
             }
         }
     }
@@ -37,10 +50,11 @@ import logo from '@/assets/logo.png';
 <style lang="scss" scoped>
 .navbar {
     display: flex;
-    margin-left: 50px;
-    margin-right: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
     justify-content: space-between;
     align-items: center;
+    background-color: #000;
 
     &-logo {
         width: 100px;
@@ -51,6 +65,8 @@ import logo from '@/assets/logo.png';
         display: flex;
 
         &__link {
+            text-decoration: none;
+            color: white;
             padding: 20px;
         }
     }

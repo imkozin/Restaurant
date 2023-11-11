@@ -15,6 +15,9 @@ export default createStore({
         localStorage.setItem('cart', JSON.stringify(state.cartItems))
       }
     },
+    setAuthenticated(state, status) {
+      state.isAuthenticated = status
+    },
     addToCart(state, item) {
       const exists = state.cartItems.filter((i) => i.product.id === item.id)
 

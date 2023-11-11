@@ -53,8 +53,6 @@ export default {
       localStorage.setItem('cart', JSON.stringify(this.cartItems))
     },
     removeFromCart(productId) {
-      console.log('prod', productId);
-      console.log('cart', this.cartItems);
       this.cartItems = this.cartItems.filter(item => item.uniqueId !== productId);
       this.updateCart();
     }
@@ -72,6 +70,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
+    padding-top: 10px;
   }
 
   &-wrapper {

@@ -35,7 +35,7 @@
                         >
                         {{ text }}
                         </v-snackbar>
-                    </div>
+                </div>
             </div>
         </div>
         <div v-else>
