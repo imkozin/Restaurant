@@ -6,7 +6,9 @@ export default createStore({
     isAuthenticated: false,
     token: '',
   },
-  getters: {},
+  getters: {
+    getCartItems: (state) => state.cartItems,
+  },
   mutations: {
     initializeStore(state) {
       if (localStorage.getItem('cart')) {
