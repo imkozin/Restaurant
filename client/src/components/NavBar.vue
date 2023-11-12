@@ -27,7 +27,7 @@ import logo from '@/assets/logo.png';
         data() {
             return {
                 logo,
-                token: localStorage.getItem('token') || null
+                token: localStorage.getItem('token') || ''
             }
         },
         computed: {
@@ -38,9 +38,8 @@ import logo from '@/assets/logo.png';
         methods: {
             logout() {
                 this.$store.commit('setAuthenticated', false)
-
+                this.$store.commit('removeToken')
                 localStorage.removeItem('token')
-                this.token = null
                 localStorage.removeItem('cart')
             }
         }

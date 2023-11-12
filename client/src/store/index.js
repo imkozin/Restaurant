@@ -6,9 +6,7 @@ export default createStore({
     isAuthenticated: false,
     token: '',
   },
-  getters: {
-    getCartItems: (state) => state.cartItems,
-  },
+  getters: {},
   mutations: {
     initializeStore(state) {
       if (localStorage.getItem('cart')) {
@@ -32,6 +30,10 @@ export default createStore({
 
       localStorage.setItem('cart', JSON.stringify(state.cartItems))
     },
+    removeToken(state) {
+      state.token = ''
+      state.cartItems = []
+    }
   },
   actions: {},
   modules: {},
