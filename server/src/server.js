@@ -56,7 +56,7 @@ const start = async () => {
                       res.status(400).json({ msg: 'Username is already taken' })
                     } else {
                       if (password.length < 6) {
-                        res.status(400).json({ msg: 'Password is too short' })
+                        res.status(400).json({ msg: 'Password is too short (min length 6)' })
                       } else {
                         const user = { username: username.toLowerCase(), password : hash }
                         const result = await db.collection('users').insertOne(user)
