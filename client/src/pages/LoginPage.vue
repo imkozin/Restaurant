@@ -1,6 +1,9 @@
 <template>
     <div class="login__page">
         <form class="login__page-form" @submit.prevent="submitLogin">
+            <router-link to="/signup">
+                <div class="login__page-link">Not a member? Sign Up here</div>
+            </router-link>
             <h1 class="login__page-form__title">Login</h1>
             <input class="login__page-form__user" type="text" placeholder="Username" v-model="username">
             <input class="login__page-form__pass" type="password" name="" id="" placeholder="Password" v-model="password">
@@ -80,6 +83,16 @@ import axios from 'axios';
     display: flex;
     align-items: center;
     justify-content: center;
+
+    &-link {
+        color: #D58C51;
+        font-family: 'Montserrat';
+        font-size: 11px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+        text-decoration-line: underline;
+    }
 
     &-snackbar {
         position: fixed;

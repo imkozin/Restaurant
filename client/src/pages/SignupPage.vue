@@ -1,6 +1,9 @@
 <template>
     <div class="signup__page">
         <form @submit.prevent="submitForm" class="signup__page-form">
+            <router-link to="/login">
+                <div class="signup__page-link">Already a member? Login here</div>
+            </router-link>
             <h1 class="signup__page-form__title">Sign Up</h1>
             <input class="signup__page-form__user" type="text" placeholder="Username" v-model="username">
             <input class="signup__page-form__pass" type="password" name="" id="" placeholder="Password" v-model="password">
@@ -85,6 +88,16 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    &-link {
+        color: #D58C51;
+        font-family: 'Montserrat';
+        font-size: 11px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+        text-decoration-line: underline;
+    }
 
     &-snackbar {
         position: fixed;
