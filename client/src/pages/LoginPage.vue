@@ -2,7 +2,7 @@
     <div class="login__page">
         <form class="login__page-form" @submit.prevent="submitLogin">
             <router-link to="/signup">
-                <div class="login__page-link">Not a member? Sign Up here</div>
+                <div class="login__page-link">Not a member? Sign up here</div>
             </router-link>
             <h1 class="login__page-form__title">Login</h1>
             <input class="login__page-form__user" type="text" placeholder="Username" v-model="username">
@@ -92,6 +92,7 @@ import axios from 'axios';
         font-weight: 300;
         line-height: normal;
         text-decoration-line: underline;
+        margin-top: 7px;
     }
 
     &-snackbar {
@@ -125,7 +126,7 @@ import axios from 'axios';
             font-weight: 700;
             line-height: normal;
             text-transform: uppercase;
-            margin-top: 36px;
+            margin-top: 15px;
             margin-bottom: 36px;
         }
 

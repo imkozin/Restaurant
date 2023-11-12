@@ -97,6 +97,7 @@ export default {
         font-weight: 300;
         line-height: normal;
         text-decoration-line: underline;
+        margin-top: 7px;
     }
 
     &-snackbar {
@@ -130,7 +131,7 @@ export default {
             font-weight: 700;
             line-height: normal;
             text-transform: uppercase;
-            margin-top: 36px;
+            margin-top: 15px;
             margin-bottom: 36px;
         }
 
